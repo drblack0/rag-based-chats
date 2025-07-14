@@ -1,0 +1,28 @@
+# Essential dependencies for RAG-based chat system
+# Core LangChain components
+langchain==0.3.1
+langchain-community==0.3.1
+langchain-core==0.3.6
+langchain-mongodb==0.2.0
+langchain-openai==0.2.1
+langchain-text-splitters==0.3.0
+
+# OpenAI for embeddings and LLM
+openai==1.48.0
+
+# MongoDB for vector storage
+pymongo==4.9.1
+
+# UI and web framework
+gradio==4.44.0
+
+# Document processing
+pypdf==5.0.0
+python-docx==1.1.2
+
+# Environment and configuration
+python-dotenv==1.0.1
+
+# Basic utilities
+requests==2.32.3
+numpy==1.26.4
