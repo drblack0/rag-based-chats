@@ -1,228 +1,172 @@
-# 🔍 RAG Chat System
+# RAG-Based Chat Application
 
-A production-ready **Retrieval-Augmented Generation (RAG)** system that enables intelligent document querying using AI-powered search and generation.
+A Retrieval-Augmented Generation (RAG) chat application built with FastAPI backend and Next.js frontend. This application allows users to upload documents and ask questions that are answered using AI-powered document search and generation.
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
-![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-orange)
-![Gradio](https://img.shields.io/badge/Gradio-Web%20Interface-yellow)
+## Features
 
-## ✨ Features
+- **Document Upload**: Support for PDF, TXT, and JSON files
+- **AI-Powered Q&A**: Ask questions and get answers based on uploaded documents
+- **Vector Search**: Uses FAISS for efficient similarity search
+- **Modern UI**: Clean, responsive Next.js frontend
+- **Real-time Chat**: Interactive chat interface with streaming responses
 
-- 🤖 **AI-Powered Q&A**: Ask natural language questions about your documents
-- 📄 **Multi-Format Support**: Process PDF, TXT, and JSON files
-- 🔍 **Semantic Search**: MongoDB Atlas Vector Search for intelligent document retrieval
-- 🎨 **Modern Web Interface**: Clean, responsive Gradio-based UI
-- 📊 **Real-Time Statistics**: Monitor your document collection
-- 🔒 **Secure**: Cloud-based storage with secure API access
-- 🚀 **Easy Deployment**: One-command setup and launch
-
-## 🏗️ Architecture
+## Project Structure
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Gradio UI     │────│   RAG Engine     │────│  MongoDB Atlas  │
-│                 │    │                  │    │  Vector Search  │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                               │
-                    ┌──────────────────┐
-                    │   OpenAI API     │
-                    │ (GPT-4 + Embeds) │
-                    └──────────────────┘
+rag-based-chats/
+├── frontend/                 # Next.js frontend application
+├── api.py                   # FastAPI main application
+├── config.py                # Configuration management
+├── rag_engine_faiss.py      # FAISS-based RAG engine
+├── document_processor.py     # Document processing utilities
+├── requirements.txt          # Python dependencies
+├── run.py                   # Backend entry point
+└── sample_files/            # Sample documents for testing
 ```
 
-## 🚀 Quick Start
+## Prerequisites
 
-### Prerequisites
+- Python 3.8+
+- Node.js 18+
+- OpenAI API key
 
-- **Python 3.8+**
-- **OpenAI API Key** ([Get one here](https://platform.openai.com/api-keys))
-- **MongoDB Atlas Cluster** with Vector Search enabled ([Setup guide](https://www.mongodb.com/docs/atlas/atlas-vector-search/create-index/))
+## Backend Setup
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd rag-chat-system
-   ```
-
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure environment**
-   
-   Create a `.env` file with your credentials:
-   ```bash
-   OPENAI_API_KEY=your_openai_api_key_here
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
-   DB_NAME=your_database_name
-   COLLECTION_NAME=your_collection_name
-   OPENAI_MODEL=gpt-4
-   EMBEDDING_MODEL=text-embedding-ada-002
-   CHUNK_SIZE=1000
-   CHUNK_OVERLAP=200
-   ```
-
-4. **Launch the application**
-   ```bash
-   python run.py
-   ```
-   
-   Or directly:
-   ```bash
-   python app.py
-   ```
-
-The application will be available at `http://localhost:7860` and will provide a shareable public link.
-
-## 📁 Project Structure
-
-```
-rag-chat-system/
-├── 📄 app.py                    # Main Gradio web application
-├── 🔧 config.py                 # Configuration management
-├── 📝 document_processor.py     # Document processing utilities
-├── 🚀 run.py                    # Startup script with checks
-├── 📋 requirements.txt          # Python dependencies
-├── 📖 README.md                 # This file
-├── 🗂️ sample_files/             # Sample documents for testing
-├── 📄 load_sample_data.py       # Load sample data script
-├── 🔒 .env                      # Environment variables (create this)
-└── 📦 .venv/                    # Virtual environment (optional)
-```
-
-## 🖥️ Usage
-
-### 1. **Upload Documents**
-- Go to the "📁 Documents" tab
-- Upload PDF, TXT, or JSON files
-- Documents are automatically processed and indexed
-
-### 2. **Ask Questions**
-- Switch to the "💬 Chat" tab
-- Type your question in natural language
-- Get AI-generated answers with source citations
-
-### 3. **Monitor System**
-- View real-time statistics in the sidebar
-- Track document count and system status
-
-## 🔧 Configuration
-
-### Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `OPENAI_API_KEY` | Your OpenAI API key | Required |
-| `MONGODB_URI` | MongoDB connection string | Required |
-| `DB_NAME` | Database name | `rag_chat_db` |
-| `COLLECTION_NAME` | Collection name | `documents` |
-| `OPENAI_MODEL` | OpenAI model to use | `gpt-4` |
-| `EMBEDDING_MODEL` | Embedding model | `text-embedding-ada-002` |
-| `CHUNK_SIZE` | Document chunk size | `1000` |
-| `CHUNK_OVERLAP` | Chunk overlap | `200` |
-
-### MongoDB Atlas Setup
-
-1. Create a MongoDB Atlas cluster
-2. Create a database and collection
-3. Set up a Vector Search index with these settings:
-   ```json
-   {
-     "fields": [
-       {
-         "type": "vector",
-         "path": "embedding",
-         "numDimensions": 1536,
-         "similarity": "cosine"
-       }
-     ]
-   }
-   ```
-
-## 📊 Sample Data
-
-Load sample documents to test the system:
+### 1. Create Virtual Environment
 
 ```bash
-python load_sample_data.py
+cd rag-based-chats
+python -m venv .venv
+
+# On Windows
+.venv\Scripts\activate
+
+# On macOS/Linux
+source .venv/bin/activate
 ```
 
-This will index sample files from the `sample_files/` directory.
-
-## 🛠️ Development
-
-### Running in Development Mode
+### 2. Install Dependencies
 
 ```bash
-# Install development dependencies
 pip install -r requirements.txt
-
-# Run with debug logging
-PYTHONPATH=. python app.py
 ```
 
-### Adding New Document Types
+### 3. Environment Configuration
 
-Extend the `DocumentProcessor` class in `document_processor.py`:
+Create a `.env` file in the `rag-based-chats` directory:
 
-```python
-def process_new_format(self, file_path: str) -> List[Document]:
-    # Your processing logic here
-    pass
+```bash
+cp env_template.txt .env
 ```
 
-## 🔍 How It Works
+Edit `.env` with your configuration:
 
-1. **Document Processing**: Uploaded documents are split into chunks using LangChain text splitters
-2. **Embedding Generation**: Each chunk is converted to vector embeddings using OpenAI's embedding model
-3. **Vector Storage**: Embeddings are stored in MongoDB Atlas with metadata
-4. **Query Processing**: User questions are embedded and used for similarity search
-5. **Context Retrieval**: Most relevant document chunks are retrieved
-6. **Answer Generation**: GPT-4 generates answers based on retrieved context
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL_NAME=gpt-4
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+DATABASE_URI=sqlite:///./chat_history.db
+FAISS_INDEX_PATH=./faiss_index/index.faiss
+FAISS_METADATA_PATH=./faiss_index/metadata.pkl
+ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+```
 
-## 🔧 Troubleshooting
+### 4. Run Backend
+
+```bash
+python run.py
+```
+
+The backend will start on `http://localhost:8000`
+
+## Frontend Setup
+
+### 1. Navigate to Frontend Directory
+
+```bash
+cd frontend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Environment Configuration
+
+Create a `.env.local` file in the `frontend` directory:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+```
+
+**Important**: Do not include trailing slashes or `/api` in the URL.
+
+### 4. Run Frontend
+
+```bash
+npm run dev
+```
+
+The frontend will start on `http://localhost:3000`
+
+## Usage
+
+1. **Start both backend and frontend** in separate terminal windows
+2. **Upload documents** using the Documents tab
+3. **Ask questions** in the Chat tab
+4. **View statistics** in the Stats tab
+
+## API Endpoints
+
+- `POST /api/ask` - Ask a question
+- `POST /api/upload` - Upload a document
+- `GET /api/stats` - Get system statistics
+- `GET /api/health` - Health check
+
+## Troubleshooting
 
 ### Common Issues
 
-**"Proxies error"**: This has been fixed with automatic compatibility patches.
+1. **"Upload failed" errors**: Check that the backend is running and the API URL is correct
+2. **CORS errors**: Ensure `ALLOWED_ORIGINS` in backend `.env` includes your frontend URL
+3. **FAISS index errors**: The index will be created automatically on first document upload
 
-**MongoDB connection issues**: 
-- Verify your connection string
-- Ensure your IP is whitelisted in Atlas
-- Check that Vector Search is enabled
+### Debug Steps
 
-**OpenAI API errors**:
-- Verify your API key
-- Check your usage limits and billing
+1. Check backend logs for Python errors
+2. Verify API health using the "Check API Health" button in the Documents tab
+3. Ensure environment variables are set correctly
+4. Check that both services are running on the expected ports
 
-**Import errors**:
-```bash
-pip install --upgrade -r requirements.txt
-```
+## Development
 
-### Logs
+### Backend Development
 
-The application provides detailed logging. Check the console output for debugging information.
+- The main FastAPI app is in `api.py`
+- RAG engine logic is in `rag_engine_faiss.py`
+- Configuration is managed in `config.py`
 
-## 📄 License
+### Frontend Development
 
-This project is open source and available under the [MIT License](LICENSE).
+- Built with Next.js 14 and TypeScript
+- Main component is in `frontend/src/app/page.tsx`
+- Uses modern React patterns with hooks
 
-## 🤝 Contributing
+## Dependencies
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Backend
+- FastAPI - Web framework
+- FAISS - Vector similarity search
+- LangChain - LLM framework
+- OpenAI - AI models and embeddings
 
-## 📞 Support
+### Frontend
+- Next.js 14 - React framework
+- TypeScript - Type safety
+- Tailwind CSS - Styling
 
-For questions or issues:
-1. Check the troubleshooting section above
-2. Review the MongoDB Atlas and OpenAI documentation
-3. Open an issue on GitHub
+## License
 
----
-
-**Built with ❤️ using LangChain, MongoDB Atlas, OpenAI, and Gradio**
+This project is for educational and development purposes.

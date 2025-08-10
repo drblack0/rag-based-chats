@@ -1,0 +1,26 @@
+# OpenAI API Configuration
+# Get your API key from: https://platform.openai.com/api-keys
+OPENAI_API_KEY=your_openai_api_key_here
+
+# FAISS Storage Configuration
+# Paths for storing the FAISS index and metadata
+FAISS_INDEX_PATH=./faiss_index/index.faiss
+FAISS_METADATA_PATH=./faiss_index/metadata.pkl
+
+# AI Model Configuration
+# OpenAI model for text embeddings
+EMBEDDING_MODEL=text-embedding-3-small
+# OpenAI model for language generation
+LLM_MODEL=gpt-4
+# Temperature for LLM responses (0.0 = deterministic, 1.0 = creative)
+LLM_TEMPERATURE=0.7
+
+# Document Processing Configuration
+# Size of text chunks when splitting documents
+CHUNK_SIZE=1000
+# Overlap between consecutive chunks
+CHUNK_OVERLAP=200
+
+# Retrieval Configuration
+# Number of similar documents to retrieve for each query
+SIMILARITY_SEARCH_K=3

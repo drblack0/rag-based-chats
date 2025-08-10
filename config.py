@@ -23,6 +23,10 @@ class Config:
     LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4")
     LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.7"))
 
+    # FAISS Storage Configuration (used by FAISS backend)
+    FAISS_INDEX_PATH = os.getenv("FAISS_INDEX_PATH", "./faiss_index/index.faiss")
+    FAISS_METADATA_PATH = os.getenv("FAISS_METADATA_PATH", "./faiss_index/metadata.pkl")
+
     # Text Splitting Configuration
     CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
     CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
