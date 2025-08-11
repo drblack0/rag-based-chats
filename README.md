@@ -74,7 +74,7 @@ ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 ### 4. Run Backend
 
 ```bash
-python run.py
+python -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The backend will start on `http://localhost:8000`
